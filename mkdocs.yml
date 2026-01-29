@@ -1,0 +1,36 @@
+site_name: 农机自动驾驶软件
+site_description: 农机自动驾驶系统新手教程和操作指南
+site_url: https://ives-cheung.github.io/rinotrack-user-manual/zh/
+theme:
+  name: material
+  language: zh
+  features:
+    - navigation.tabs
+    - navigation.top
+
+extra:
+  alternate:
+    - name: 中文
+      lang: zh
+      link: https://ives-cheung.github.io/rinotrack-user-manual/zh/
+    - name: English
+      lang: en
+      link: https://ives-cheung.github.io/rinotrack-user-manual/en/
+
+plugins:
+  - search
+
+docs_dir: docs/zh
+site_dir: site/zh
+
+nav:
+  - 首页: index.md
+  - 📚 教程:
+    - 1️⃣ 系统硬件组成: 01-hardware.md
+    - 2️⃣ 认识主界面: 02-interface.md
+    - 3️⃣ 通信配置: 03-communication.md
+    - 4️⃣ 状态检查: 04-status.md
+    - 5️⃣ 创建作业: 05-create-job.md
+    - 6️⃣ 导航线和自动驾驶: 06-navigation.md
+    - 7️⃣ 更多设置: 07-settings.md
+  - 🌐 English: 'https://127.0.0.1:8001/'

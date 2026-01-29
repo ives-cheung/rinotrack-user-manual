@@ -1,0 +1,36 @@
+site_name: Autonomous Agricultural Machinery Driving Software
+site_description: Tutorial and Operation Guide for Autonomous Driving System
+site_url: https://ives-cheung.github.io/rinotrack-user-manual/en/
+theme:
+  name: material
+  language: en
+  features:
+    - navigation.tabs
+    - navigation.top
+
+extra:
+  alternate:
+    - name: 中文
+      lang: zh
+      link: https://ives-cheung.github.io/rinotrack-user-manual/zh/
+    - name: English
+      lang: en
+      link: https://ives-cheung.github.io/rinotrack-user-manual/en/
+
+plugins:
+  - search
+
+docs_dir: docs/en
+site_dir: site/en
+
+nav:
+  - Home: index.md
+  - 📚 Tutorials:
+    - 1️⃣ System Hardware Components: 01-hardware.md
+    - 2️⃣ Introducing the Main Interface: 02-interface.md
+    - 3️⃣ Communication Configuration: 03-communication.md
+    - 4️⃣ System Status Check: 04-status.md
+    - 5️⃣ Creating Your First Job: 05-create-job.md
+    - 6️⃣ Creating Navigation Lines and Starting Operations: 06-navigation.md
+    - 7️⃣ More Settings: 07-settings.md
+  - 🌐 中文: 'http://127.0.0.1:8000/'

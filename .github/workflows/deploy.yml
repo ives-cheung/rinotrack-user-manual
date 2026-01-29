@@ -1,0 +1,54 @@
+name: Build and Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    
+    - name: Install dependencies
+      run: |
+        pip install mkdocs mkdocs-material
+    
+    - name: Build documentation
+      run: |
+        rm -rf site/
+        python -m mkdocs build -f mkdocs.yml
+        mkdir -p site_temp/en
+        cp -r site/zh/* site_temp/
+        python -m mkdocs build -f mkdocs-en.yml
+        cp -r site/en/* site_temp/en/
+        cat > site_temp/index.html << 'EOF'
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="refresh" content="0; url=zh/">
+            <title>农机自动驾驶软件文档</title>
+        </head>
+        <body>
+            <p>正在重定向到中文版本... / Redirecting to Chinese version...</p>
+            <a href="zh/">中文版本</a> | <a href="en/">English Version</a>
+        </body>
+        </html>
+        EOF
+        rm -rf site
+        mv site_temp site
+    
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./site
+        cname: ives-cheung.github.io

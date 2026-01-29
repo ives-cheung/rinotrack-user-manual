@@ -21,15 +21,22 @@ jobs:
       run: |
         pip install mkdocs mkdocs-material
     
-    - name: Build documentation
+    - name: Build Chinese version
       run: |
-        rm -rf site/
         python -m mkdocs build -f mkdocs.yml
-        mkdir -p site_temp/en
-        cp -r site/zh/* site_temp/
+        mkdir -p site_merged/zh
+        cp -r site/* site_merged/zh/
+    
+    - name: Build English version
+      run: |
+        rm -rf site
         python -m mkdocs build -f mkdocs-en.yml
-        cp -r site/en/* site_temp/en/
-        cat > site_temp/index.html << 'EOF'
+        mkdir -p site_merged/en
+        cp -r site/* site_merged/en/
+    
+    - name: Create root index
+      run: |
+        cat > site_merged/index.html << 'EOF'
         <!DOCTYPE html>
         <html>
         <head>
@@ -43,11 +50,9 @@ jobs:
         </body>
         </html>
         EOF
-        rm -rf site
-        mv site_temp site
     
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./site
+        publish_dir: ./site_merged
